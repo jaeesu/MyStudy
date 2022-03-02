@@ -3,7 +3,7 @@
 * 상속 전략
 @Inheritance(strategy = InheritanceType.XXX)
 <br>
-글을 작성하기 위한 예시 : person(추상 클래스), female(Person을 상속받은 클래스), male(Person을 상속받은 클래스)
+글을 작성하기 위한 예시 : person(추상 클래스), female(Person을 상속받은 클래스), male(Person을 상속받은 클래스)<br>
 1. joined<br>
    person, female, male 테이블이 생성되며, female과 male은 person과 외래 관계를 갖는다.<br>
     값을 insert(delete) 할 때는 상위(하위) 클래스에서 먼저 insert(delete) 한 후 하위(상위) 클래스에서 insert(delete) 한다.<br> 
@@ -12,12 +12,15 @@
     * 단점 : 조회 시 조인으로 인한 성능 저하 & 조회 쿼리의 복잡함, insert, delete를 2번 씩 호출
    
    <br>
+   <br>
 2. table_per_class<br>
    하위 클래스가 완전히 별개의 테이블로 생성된다. person 테이블은 생성되지 않으며, 완전한 female, male 테이블이 생성된다.<br>
     insert, delete, find 시에도 테이블 단독으로 수행한다.
    * 장점 : 서브 타입의 구분이 명확해 처리할 때 효과적이면 not null 제약조건을 사용할 수 있다.
    * 여러 테이블을 함께 조회할 때 성능이 느리다(union sql) => 통합이 힘들다
 
+<br>
+<br>
 3. single_table<br>
    모든 하위클래스를 person이라는 테이블로 만든다.
    male에만 있는 속성은 female 컬럼에서는 null로 나타난다.
