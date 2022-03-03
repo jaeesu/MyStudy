@@ -3,17 +3,20 @@
 * 상속 전략
 @Inheritance(strategy = InheritanceType.XXX)
 <br>
+추상 클래스, 일반 클래스 어느 것을 상속해도 똑같이 진행된다.
+<br>
 글을 작성하기 위한 예시 : person(추상 클래스), female(Person을 상속받은 클래스), male(Person을 상속받은 클래스)<br>
 1. joined<br>
    person, female, male 테이블이 생성되며, female과 male은 person과 외래 관계를 갖는다.<br>
     값을 insert(delete) 할 때는 상위(하위) 클래스에서 먼저 insert(delete) 한 후 하위(상위) 클래스에서 insert(delete) 한다.<br> 
    값을 찾을 때는 상위 클래스와 하위 클래스의 테이블을 조인한다.
+    => 하위 클래스에 직접 id를 명시해주어도 된다. (@Id)<br>
     * 장점 : 테이블 정규화, 외래키 참조 무결성 제약조건 활용 가능, 저장공간 효율화
     * 단점 : 조회 시 조인으로 인한 성능 저하 & 조회 쿼리의 복잡함, insert, delete를 2번 씩 호출
    
    <br>
    <br>
-2. table_per_class<br>
+3. table_per_class<br>
    하위 클래스가 완전히 별개의 테이블로 생성된다. person 테이블은 생성되지 않으며, 완전한 female, male 테이블이 생성된다.<br>
     insert, delete, find 시에도 테이블 단독으로 수행한다.
    * 장점 : 서브 타입의 구분이 명확해 처리할 때 효과적이면 not null 제약조건을 사용할 수 있다.
